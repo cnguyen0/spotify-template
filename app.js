@@ -3,12 +3,21 @@ var baseUrl = 'https://api.spotify.com/v1/search';
 var myApp = angular.module('myApp', []);
 
 var myCtrl = myApp.controller('myCtrl', function($scope, $http) {
+  'use strict'
+
   $scope.audioObject = {}
   // This is the song that is currently being played, triggered by clicking on the album art
+  
   $scope.currentSong = null;
   // These are the tracks that persist between multiple queries, and appear in
   // the favorites section
+  
   $scope.favorites = [];
+  //$scope.favorite = angular.from Json(localStorage.getItem($http))
+
+  function saveFaves() {
+  }
+
   // If you want to get REALLY fancy, then you could use localStorage so that
   // favorites don't disapear on a page refresh!
 
@@ -17,10 +26,12 @@ var myCtrl = myApp.controller('myCtrl', function($scope, $http) {
 
   // Adds a given song to our favorites, so we can play it whenever we want
   $scope.addToFavorites = function(favTrack) {
+    $scope.favorite.push($scope.audioObject);
   }
 
   // Removes a given track from our favorites list
   $scope.removeFromFavorites = function(removeTrack) {
+
   }
 
   // Uses the $http service to make a request to spotify and get our songs
@@ -42,7 +53,7 @@ var myCtrl = myApp.controller('myCtrl', function($scope, $http) {
       //in the next comment 
       console.log(response.data);
 
-      // Use the response and modify the $scope.tracks variable so that it
+      // Use the response and modify the $scope.tracks vriable so that it
       // contains objects with the follwing properties
       // {title: "Name of the song",
       //  img: "URL to the album cover art image",
@@ -52,7 +63,7 @@ var myCtrl = myApp.controller('myCtrl', function($scope, $http) {
       // You can name those properties whatever you want BUT the play()
       // function expects the preview property.
       // Hint: lodash can make creating this object pretty easy :)
-      $scope.tracks = null;
+      $scope.tracks = response.data;
     }
 
     function fail(response) {

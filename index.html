@@ -29,8 +29,12 @@
           <button type="submit" class="btn btn-primary" type="button">Search</button>
         </form>
         <!-- Only show results when we have them -->
-        <div ng-show="tracks">
+        <div ng-show="tracks"
+              ng-repeat="track in tracks">
           <!-- Show each track, and create and element for it -->
+          <h1>{{tracks.title}}</h1>
+          <p>{{tracks.artist}}</p>
+          <a href="{{tracks.url}}"><img ng-src="{{tracks.img}}" alt="album"></a>
         </div>
       </div>
 
